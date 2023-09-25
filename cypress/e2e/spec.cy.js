@@ -10,4 +10,12 @@ describe('Home Page Initial Load', () => {
   it('Displays page title', () => {
     cy.get('header').find('h1').should('include.text', 'URL Shortener')
   })
+
+  it('Displays the form', () => {
+    cy.get('form').within(() => {
+      cy.get('input[name=title]').should('exist').and('be.visible')
+      cy.get('input[name=urlToShorten]').should('exist').and('be.visible')
+      cy.get('button').should('exist').and('be.visible')
+    })
+  })
 })
