@@ -25,6 +25,15 @@ describe('Home Page Initial Load', () => {
     })
   })
 
+  it('Form is updated when user fills in input', () => {
+    cy.get('form').within(() => {
+      cy.get('input[name=title]').type('This will update')
+      cy.get('input[name=title]').should('have.value', 'This will update')
+      cy.get('input[name=urlToShorten]').type('This will update too')
+      cy.get('input[name=urlToShorten]').should('have.value', 'This will update too')
+    })
+  })
+
   it('Displays any existing urls', () => {
     cy.get('.urls-section').children().should('have.length', 1)
     cy.get('div.url').find('h3').should('include.text', 'Awesome photo')
