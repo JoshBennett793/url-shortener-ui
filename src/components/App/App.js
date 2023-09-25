@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     getUrls().then(data => setUrls(data.urls))
-  }, [urls])
+  }, [])
 
   return (
     <main className='App'>
