@@ -6,16 +6,18 @@ import UrlForm from '../UrlForm/UrlForm'
 
 function App() {
   const [urls, setUrls] = useState([])
+  const [shouldFetchData, setShouldFetchData] = useState(false)
 
   useEffect(() => {
     getUrls().then(data => setUrls(data.urls))
-  }, [])
+    setShouldFetchData(false)
+  }, [shouldFetchData])
 
   return (
     <main className='App'>
       <header>
         <h1>URL Shortener</h1>
-        <UrlForm />
+        <UrlForm setShouldFetchData={setShouldFetchData} />
       </header>
 
       <UrlContainer urls={urls} />

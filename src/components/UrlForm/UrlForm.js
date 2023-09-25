@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
+import { postUrl } from '../../apiCalls'
 
-function UrlForm() {
-  const [title, setTitle] = useState('');
-  const [urlToShorten, setUrlToShorten] = useState('');
+function UrlForm({ setShouldFetchData }) {
+  const [title, setTitle] = useState('')
+  const [urlToShorten, setUrlToShorten] = useState('')
 
   const handleSubmit = e => {
-    e.preventDefault();
-    clearInputs();
+    e.preventDefault()
+    postUrl(urlToShorten, title).then(() => {
+      clearInputs()
+      setShouldFetchData(true)
+    })
   }
 
   const clearInputs = () => {
-    setTitle('');
-    setUrlToShorten('');
+    setTitle('')
+    setUrlToShorten('')
   }
 
   return (
@@ -32,11 +36,9 @@ function UrlForm() {
         onChange={e => setUrlToShorten(e.target.value)}
       />
 
-      <button onClick={e => handleSubmit(e)}>
-        Shorten Please!
-      </button>
+      <button onClick={e => handleSubmit(e)}>Shorten Please!</button>
     </form>
   )
 }
 
-export default UrlForm;
+export default UrlForm
