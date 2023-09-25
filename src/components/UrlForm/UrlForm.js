@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import { postUrl } from '../../apiCalls'
 
-function UrlForm({ setShouldFetchData }) {
+function UrlForm({ setUrls }) {
   const [title, setTitle] = useState('')
   const [urlToShorten, setUrlToShorten] = useState('')
 
   const handleSubmit = e => {
     e.preventDefault()
-    postUrl(urlToShorten, title).then(() => {
+    postUrl(urlToShorten, title).then(data => {
+      setUrls(prev => {
+        return [...prev, data]
+      })
       clearInputs()
-      setShouldFetchData(true)
     })
   }
 
